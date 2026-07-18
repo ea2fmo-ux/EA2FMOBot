@@ -1,0 +1,17 @@
+{
+  "name": "ea2fmo-bot",
+  "version": "1.0.0",
+  "description": "Bot de Telegram para información de propagación de radio",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=20 <23"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "telegraf": "^4.16.3"
+  }
+}
