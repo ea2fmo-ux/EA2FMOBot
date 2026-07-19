@@ -82,15 +82,16 @@ bot.hears("📡 Propagación", async (ctx) => {
 
     const solar = resultado.solar.solardata;
     console.log(solar);
-    const muf = Number(solar.muf || 0);
-
+    const mufTexto = solar.muf;
+const muf = Number(mufTexto);
+const hayMuf = !isNaN(muf);
     const sfi = Number(solar.solarflux);
     const k = Number(solar.kindex);
 
     let mensaje =
 `📡 Estado de propagación
 
-🌐 MUF: ${muf} MHz
+🌐 MUF: ${hayMuf ? muf + " MHz" : "No disponible"}
 
 `;
 
