@@ -81,13 +81,19 @@ bot.hears("📡 Propagación", async (ctx) => {
     });
 
     const solar = resultado.solar.solardata;
+    const muf = Number(solar.muf || 0);
 
     const sfi = Number(solar.solarflux);
     const k = Number(solar.kindex);
 
-    let mensaje = "📡 Estado de propagación\n\n";
+    let mensaje =
+`📡 Estado de propagación
 
-if (sfi >= 100 && k <= 2) {
+🌐 MUF: ${muf} MHz
+
+`;
+
+if (muf >= 28 && k <= 2) {
 
   mensaje += `
 🟢 10 m → Excelente para DX
@@ -101,7 +107,7 @@ if (sfi >= 100 && k <= 2) {
 💡 Hoy merece la pena probar 10, 15 y 20 metros.
 `;
 
-} else if (sfi >= 70 && k <= 3) {
+} else if (muf >= 21 && k <= 3) {
 
   mensaje += `
 🟡 10 m → Variable
@@ -112,15 +118,30 @@ if (sfi >= 100 && k <= 2) {
 💡 Las mejores bandas serán 15, 20 y 40 metros.
 `;
 
+} else if (muf >= 14) {
+
+  mensaje += `
+🔴 10 m → Cerrada
+🟡 12 m → Variable
+🟡 15 m → Regular
+🟡 20 m → Buena
+🟢 40 m → Buena
+🟢 80 m → Muy buena
+
+💡 Hoy conviene centrarse en 20, 40 y 80 metros.
+`;
+
 } else {
 
   mensaje += `
 🔴 10 m → Cerrada
-🟡 20 m → Regular
+🔴 12 m → Cerrada
+🔴 15 m → Muy difícil
+🟡 20 m → Variable
 🟢 40 m → Buena
 🟢 80 m → Muy buena
 
-💡 Hoy conviene centrarse en 40 y 80 metros.
+💡 Hoy céntrate en 40 y 80 metros.
 `;
 
 }
