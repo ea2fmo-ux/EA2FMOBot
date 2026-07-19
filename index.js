@@ -94,15 +94,19 @@ bot.hears("🕒 Hora UTC", async (ctx) => {
   await ctx.reply(`🕒 Hora UTC:\n${ahora}`);
 });
 bot.hears("☀️ Datos solares", async (ctx) => {
-  await ctx.reply(`☀️ Datos solares
+  try {
+    const axios = require("axios");
 
-🔄 Conectando con el servicio...
+    const { data } = await axios.get("https://www.hamqsl.com/solarxml.php");
 
-Próximamente mostraré:
-• SFI
-• Índice K
-• Índice A
-• Manchas solares`);
+    await ctx.reply(
+      "☀️ Datos solares\n\n" +
+      "Conexión correcta.\n" +
+      "En el siguiente paso leeremos los datos reales del servidor."
+    );
+  } catch (error) {
+    await ctx.reply("❌ No se ha podido conectar con el servidor de datos solares.");
+  }
 });
 app.get("/", (_req, res) => {
   res.status(200).send("EA2FMOBot está funcionando.");
