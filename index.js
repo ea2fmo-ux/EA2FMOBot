@@ -73,12 +73,6 @@ bot.hears("📡 Propagación", async (ctx) => {
   );
 });
 
-bot.hears("☀️ Datos solares", async (ctx) => {
-  await ctx.reply(
-    "☀️ Próximamente mostraré SFI, Kp, A, manchas solares y alertas."
-  );
-});
-
 bot.hears("📻 Bandas HF", async (ctx) => {
   await ctx.reply(
     "📻 Analizaré desde 160 metros hasta 10/11 metros."
