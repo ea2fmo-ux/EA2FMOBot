@@ -88,7 +88,6 @@ bot.hears("📻 Bandas HF", async (ctx) => {
 bot.hears("ℹ️ Ayuda", async (ctx) => {
   await ctx.reply("Escribe /help para ver todos los comandos.");
 });
-});
 
 bot.hears("🕒 Hora UTC", async (ctx) => {
   const ahora = new Date().toUTCString();
