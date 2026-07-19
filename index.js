@@ -91,7 +91,7 @@ bot.hears("☀️ Datos solares", async (ctx) => {
   try {
     const axios = require("axios");
 
-    const { data } = await axios.get("https://www.hamqsl.com/solarxml.php");
+   const { data } = await axios.get("https://www.hamqsl.com/solarxml.php?format=json");
 
     await ctx.reply(
       "☀️ Datos solares\n\n" +
