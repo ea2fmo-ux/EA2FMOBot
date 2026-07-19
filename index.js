@@ -88,7 +88,7 @@ bot.hears("📡 Propagación", async (ctx) => {
     let mensaje = "📡 Estado de propagación\n\n";
 
     if (sfi >= 100 && k <= 2) {
-      mensaje += `
+      mensaje +=`
 `🟢 10 m → Excelente para DX
 🟢 12 m → Muy buena
 🟢 15 m → Muy buena
@@ -99,7 +99,7 @@ bot.hears("📡 Propagación", async (ctx) => {
 
 💡 Hoy merece la pena probar 10, 15 y 20 metros.`;
     } else if (sfi >= 70 && k <= 3) {
-      mensaje += `
+      mensaje +=`
 `🟡 10 m → Variable
 🟢 15 m → Buena
 🟢 20 m → Muy buena
@@ -107,7 +107,7 @@ bot.hears("📡 Propagación", async (ctx) => {
 
 💡 Las mejores bandas serán 15, 20 y 40 metros.`;
     } else {
-      mensaje += `
+      mensaje +=`
 `🔴 10 m → Cerrada
 🟡 20 m → Regular
 🟢 40 m → Buena
