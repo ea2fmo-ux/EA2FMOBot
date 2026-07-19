@@ -104,7 +104,7 @@ if (muf >= 28 && k <= 2) {
 🟢 17 m → Buena
 🟢 20 m → Excelente
 🟡 40 m → Normal
-🟢 80 m → Buena por la noche
+${esNoche ? "🟢 80 m → Excelente" : "🟡 80 m → Regular"}
 
 💡 Hoy merece la pena probar 10, 15 y 20 metros.
 `;
@@ -184,6 +184,8 @@ const solar = resultado.solar.solardata;
 
 const sfi = Number(solar.solarflux);
 const k = Number(solar.kindex);
+    const horaUTC = new Date().getUTCHours();
+const esNoche = horaUTC >= 20 || horaUTC < 6;
 const a = Number(solar.aindex);
 const xray = solar.xray;
 
