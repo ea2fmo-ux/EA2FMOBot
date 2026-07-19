@@ -1,5 +1,6 @@
 const express = require("express");
 const { Telegraf, Markup } = require("telegraf");
+const xml2js = require("xml2js");
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const WEBHOOK_URL = process.env.WEBHOOK_URL;
