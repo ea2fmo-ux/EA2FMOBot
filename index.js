@@ -20,8 +20,10 @@ const app = express();
 app.use(express.json());
 
 const menu = Markup.keyboard([
+  [
   ["📡 Propagación", "☀️ Datos solares"],
-  ["🕒 Hora UTC", "📻 Bandas HF"],
+  ["📻 27 MHz", "🕒 Hora UTC"],
+  ["📻 Bandas HF"],
   ["ℹ️ Ayuda"]
 ]).resize();
 
