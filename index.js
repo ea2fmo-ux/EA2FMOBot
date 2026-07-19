@@ -101,13 +101,45 @@ bot.hears("☀️ Datos solares", async (ctx) => {
 
 const solar = resultado.solar.solardata;
 
+const sfi = Number(solar.solarflux);
+const k = Number(solar.kindex);
+const a = Number(solar.aindex);
+const xray = solar.xray;
+
+const estadoSFI =
+  sfi >= 100 ? "🟢 Excelente" :
+  sfi >= 70 ? "🟡 Normal" :
+  "🔴 Baja";
+
+const estadoK =
+  k <= 1 ? "🟢 Muy estable" :
+  k == 2 ? "🟢 Estable" :
+  k == 3 ? "🟡 Inestable" :
+  k == 4 ? "🟠 Activo" :
+  "🔴 Tormenta";
+
+const estadoA =
+  a <= 7 ? "🟢 Tranquilo" :
+  a <= 15 ? "🟡 Ligera actividad" :
+  a <= 29 ? "🟠 Activo" :
+  "🔴 Muy perturbado";
+
+const letraX = xray.charAt(0);
+
+const estadoX =
+  letraX === "A" ? "🟢 Muy baja" :
+  letraX === "B" ? "🟢 Baja" :
+  letraX === "C" ? "🟡 Moderada" :
+  letraX === "M" ? "🟠 Fuerte" :
+  "🔴 Extrema";
+
 await ctx.reply(
-  "☀️ Datos solares reales\n\n" +
-  `📡 SFI: ${solar.solarflux}\n` +
-  `🌍 Índice K: ${solar.kindex}\n` +
-  `📈 Índice A: ${solar.aindex}\n` +
+  "☀️ Datos solares\n\n" +
+  `📡 SFI: ${sfi} ${estadoSFI}\n` +
+  `🌍 Índice K: ${k} ${estadoK}\n` +
+  `📈 Índice A: ${a} ${estadoA}\n` +
   `☀️ Manchas solares: ${solar.sunspots}\n` +
-  `☢️ Rayos X: ${solar.xray}`
+  `☢️ Rayos X: ${xray} ${estadoX}`
 );
   } catch (error) {
     await ctx.reply("❌ No se ha podido conectar con el servidor de datos solares.");
