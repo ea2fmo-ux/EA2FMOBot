@@ -69,9 +69,58 @@ bot.command("bandas", async (ctx) => {
 });
 
 bot.hears("📡 Propagación", async (ctx) => {
-  await ctx.reply(
-    "📡 La consulta de propagación real se añadirá en el siguiente paso."
-  );
+  try {
+    const axios = require("axios");
+    const xml2js = require("xml2js");
+
+    const { data } = await axios.get("https://www.hamqsl.com/solarxml.php");
+
+    const resultado = await xml2js.parseStringPromise(data, {
+      explicitArray: false,
+      trim: true
+    });
+
+    const solar = resultado.solar.solardata;
+
+    const sfi = Number(solar.solarflux);
+    const k = Number(solar.kindex);
+
+    let mensaje = "📡 Estado de propagación\n\n";
+
+    if (sfi >= 100 && k <= 2) {
+      mensaje += `
+`🟢 10 m → Excelente para DX
+🟢 12 m → Muy buena
+🟢 15 m → Muy buena
+🟢 17 m → Buena
+🟢 20 m → Excelente
+🟡 40 m → Normal
+🟢 80 m → Buena por la noche
+
+💡 Hoy merece la pena probar 10, 15 y 20 metros.`;
+    } else if (sfi >= 70 && k <= 3) {
+      mensaje += `
+`🟡 10 m → Variable
+🟢 15 m → Buena
+🟢 20 m → Muy buena
+🟢 40 m → Buena
+
+💡 Las mejores bandas serán 15, 20 y 40 metros.`;
+    } else {
+      mensaje += `
+`🔴 10 m → Cerrada
+🟡 20 m → Regular
+🟢 40 m → Buena
+🟢 80 m → Muy buena
+
+💡 Hoy conviene centrarse en 40 y 80 metros.`;
+    }
+
+    await ctx.reply(mensaje);
+
+  } catch (error) {
+    await ctx.reply("❌ No se ha podido obtener la propagación.");
+  }
 });
 
 bot.hears("📻 Bandas HF", async (ctx) => {
