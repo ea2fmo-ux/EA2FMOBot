@@ -20,7 +20,8 @@ app.use(express.json());
 
 const menu = Markup.keyboard([
   ["📡 Propagación", "☀️ Datos solares"],
-  ["📻 Bandas HF", "ℹ️ Ayuda"]
+  ["🕒 Hora UTC", "📻 Bandas HF"],
+  ["ℹ️ Ayuda"]
 ]).resize();
 
 bot.start(async (ctx) => {
@@ -86,6 +87,12 @@ bot.hears("📻 Bandas HF", async (ctx) => {
 
 bot.hears("ℹ️ Ayuda", async (ctx) => {
   await ctx.reply("Escribe /help para ver todos los comandos.");
+});
+});
+
+bot.hears("🕒 Hora UTC", async (ctx) => {
+  const ahora = new Date().toUTCString();
+  await ctx.reply(`🕒 Hora UTC:\n${ahora}`);
 });
 
 app.get("/", (_req, res) => {
