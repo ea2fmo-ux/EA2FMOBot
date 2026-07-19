@@ -93,7 +93,17 @@ bot.hears("🕒 Hora UTC", async (ctx) => {
   const ahora = new Date().toUTCString();
   await ctx.reply(`🕒 Hora UTC:\n${ahora}`);
 });
+bot.hears("☀️ Datos solares", async (ctx) => {
+  await ctx.reply(`☀️ Datos solares
 
+🔄 Conectando con el servicio...
+
+Próximamente mostraré:
+• SFI
+• Índice K
+• Índice A
+• Manchas solares`);
+});
 app.get("/", (_req, res) => {
   res.status(200).send("EA2FMOBot está funcionando.");
 });
