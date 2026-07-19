@@ -92,11 +92,22 @@ bot.hears("☀️ Datos solares", async (ctx) => {
   try {
     const axios = require("axios");
 
-   const { data } = await axios.get("https://www.hamqsl.com/solarxml.php?format=json");
+   const { data } = await axios.get("https://www.hamqsl.com/solarxml.php");
 
-    await ctx.reply(
-  "☀️ Datos solares\n\n" +
-  JSON.stringify(data, null, 2)
+    const resultado = await xml2js.parseStringPromise(data, {
+  explicitArray: false,
+  trim: true
+});
+
+const solar = resultado.solar.solardata;
+
+await ctx.reply(
+  "☀️ Datos solares reales\n\n" +
+  `📡 SFI: ${solar.solarflux}\n` +
+  `🌍 Índice K: ${solar.kindex}\n` +
+  `📈 Índice A: ${solar.aindex}\n` +
+  `☀️ Manchas solares: ${solar.sunspots}\n` +
+  `☢️ Rayos X: ${solar.xray}`
 );
   } catch (error) {
     await ctx.reply("❌ No se ha podido conectar con el servidor de datos solares.");
